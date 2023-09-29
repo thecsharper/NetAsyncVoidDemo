@@ -7,18 +7,18 @@ namespace AsyncVoidDemo
         public async static Task Main()
         {
             Console.WriteLine("before");
-            
+
             await Run(() => Test());
-            
+
             Console.WriteLine("after");
         }
 
-       public static async void Test()
+        public static async void Test()
         {
             Console.WriteLine("begin");
 
             await Task.Delay(1000);
-            
+
             Console.WriteLine("end");
         }
 
@@ -26,7 +26,9 @@ namespace AsyncVoidDemo
         {
             var currentContext = SynchronizationContext.Current;
             var synchronizationContext = new AsyncVoidSynchronizationContext(currentContext);
+            
             SynchronizationContext.SetSynchronizationContext(synchronizationContext);
+            
             try
             {
                 action();
